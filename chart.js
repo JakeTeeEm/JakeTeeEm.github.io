@@ -1,4 +1,4 @@
-import chartData from './chartData.json';
+import chartData from './chartData.json' assert { type: 'json' };
 
 
 
