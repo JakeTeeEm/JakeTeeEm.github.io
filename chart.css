@@ -1,0 +1,88 @@
+html {
+    font-family: 'Courier Prime', monospace, Calibri, 'Times New Roman', Arial, sans-serif;
+
+    height: 100%;
+}
+
+
+body {
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: 5% 4fr 5%;
+    grid-template-rows: 20% 4fr 1fr;
+}
+
+
+h1 {
+    grid-column: 2;
+
+    margin: auto;
+
+    text-align: center;
+    font-size: 3vw;
+}
+
+
+a:any-link {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+
+#chart_data {
+    grid-column: 2;
+    grid-row: 2;
+
+    display: grid;
+    grid-template-rows: repeat(12, 1fr);
+}
+
+#chart_data > div {
+    display: grid;
+    grid-template-columns: repeat(32, 1fr);
+}
+
+#chart_data > div > p {
+    text-align: center;
+    font-size: 1.2vw;
+
+    margin: auto;
+    padding: 3px;
+}
+
+#chart_data > div > div {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    margin: auto;
+
+    outline: 1px solid black;
+}
+
+#chart_data > div > div p {
+    padding: 3px;
+
+    font-size: .75vw;
+    text-align: end;
+}
+
+
+.live {
+    background-color: rgb(0, 255, 0, .45);
+}
+
+.offline {
+    background-color: rgba(255, 0, 0, .6);
+}
+
+.invalid {
+    background-color: lightgrey;
+}
+
+.no_data {
+    background-color: white;
+}
