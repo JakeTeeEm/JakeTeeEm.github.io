@@ -22,7 +22,9 @@ async function createHtmlTable() {
 
                 let pDiv = document.createElement('p');
 
-                pDiv.appendChild(document.createTextNode(`${j}`));
+                if (j <= monthDayCounts[i]) {
+                    pDiv.appendChild(document.createTextNode(`${j}`));
+                }
 
 
                 childDiv.appendChild(pDiv);
@@ -36,6 +38,14 @@ async function createHtmlTable() {
 }
 
 (async function main() {
+    // Get if leap year
+    const date = new Date();
+
+    if (date.getFullYear() % 4 === 0) {
+        monthDayCounts[1] = 29;
+    }
+
+    // Create actually shown data table
     await createHtmlTable();
 
 
@@ -67,6 +77,8 @@ async function createHtmlTable() {
                     else if (dateUNIX === chartData.data[k].day) {
                         if (chartData.data[k].live === true) {
                             chart[i].children[j + 1].classList.add('live');
+
+                            chart[i].children[j + 1].addEventListener('hover', functionOnClick);
                         } else {
                             chart[i].children[j + 1].classList.add('offline');
                         }
@@ -80,3 +92,7 @@ async function createHtmlTable() {
         }
     }
 })();
+
+async function functionOnClick() {
+    alert('meow');
+}

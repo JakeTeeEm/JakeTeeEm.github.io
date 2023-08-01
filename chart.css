@@ -10,7 +10,7 @@ body {
 
     display: grid;
     grid-template-columns: 5% 4fr 5%;
-    grid-template-rows: 20% 4fr 1fr;
+    grid-template-rows: 20% 1fr 1fr;
 }
 
 
@@ -40,6 +40,8 @@ a:hover {
 
     display: grid;
     grid-template-rows: repeat(12, 1fr);
+
+    background-color: white;
 }
 
 #chart_data > div {
@@ -70,13 +72,18 @@ a:hover {
     text-align: end;
 }
 
+#chart_data > div > div:hover:not(.invalid) {
+    box-shadow: 0px 0px 9px black;
+    z-index: 99 !important;
+}
+
 
 .live {
-    background-color: rgb(0, 255, 0, .45);
+    background-color: rgb(47, 255, 47);
 }
 
 .offline {
-    background-color: rgba(255, 0, 0, .6);
+    background-color: rgb(255, 69, 69);
 }
 
 .invalid {
@@ -85,4 +92,11 @@ a:hover {
 
 .no_data {
     background-color: white;
+}
+
+
+.popup {
+    position: absolute;
+
+
 }
