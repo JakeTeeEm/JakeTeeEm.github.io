@@ -67,14 +67,18 @@ async function createHtmlTable() {
         for (let j = 0; j < 31; j++) {
             if (j < monthDayCounts[i]) {
                 for (let k = 0;; k++) {
-                    let dateUNIX = Date.parse(`${monthNames[i]} ${j + 1}, 2023`) + 3600000;
+                    let chartDate = {
+                        year: 2023,
+                        month: i + 1,
+                        day: j + 1
+                    }
 
                     if (k >= chartData.data.length) {
                         chart[i].children[j + 1].classList.add('no_data');
 
                         break;
                     }
-                    else if (dateUNIX === chartData.data[k].day) {
+                    else if (chartData.data[k].day.year === chartDate.year && chartData.data[k].day.month === chartDate.month && chartData.data[k].day.day === chartDate.day) {
                         if (chartData.data[k].live === true) {
                             chart[i].children[j + 1].classList.add('live');
 
@@ -83,6 +87,7 @@ async function createHtmlTable() {
                             chart[i].children[j + 1].classList.add('offline');
                         }
 
+                        console.log(chartDate);
                         break;
                     }
                 }
