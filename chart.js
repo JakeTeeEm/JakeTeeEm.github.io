@@ -9,7 +9,7 @@ async function createHtmlTable() {
 
         monthDiv.id = monthNames[i];
 
-        for (let j = 0; j < 32; j++) {
+        for (let j = 0; j <= monthDayCounts[i]; j++) {
             let childDiv;
 
             if (j === 0) {
@@ -22,9 +22,7 @@ async function createHtmlTable() {
 
                 let pDiv = document.createElement('p');
 
-                if (j <= monthDayCounts[i]) {
-                    pDiv.appendChild(document.createTextNode(`${j}`));
-                }
+                pDiv.appendChild(document.createTextNode(`${j}`));
 
 
                 childDiv.appendChild(pDiv);
@@ -64,7 +62,7 @@ async function createHtmlTable() {
     let chart = document.getElementById('chart_data').children;
 
     for (let i = 0; i < 12; i++) {
-        for (let j = 0; j < 31; j++) {
+        for (let j = 0; j < monthDayCounts[i]; j++) {
             if (j < monthDayCounts[i]) {
                 for (let k = 0;; k++) {
                     let chartDate = {
@@ -74,26 +72,39 @@ async function createHtmlTable() {
                     }
 
                     if (k >= chartData.data.length) {
-                        chart[i].children[j + 1].classList.add('no_data');
+                        chart[i].children[j + 1].className = 'no_data';
 
                         break;
                     }
                     else if (chartData.data[k].day.year === chartDate.year && chartData.data[k].day.month === chartDate.month && chartData.data[k].day.day === chartDate.day) {
                         if (chartData.data[k].live === true) {
-                            chart[i].children[j + 1].classList.add('live');
+                            chart[i].children[j + 1].className = 'live';
 
-                            chart[i].children[j + 1].addEventListener('hover', functionOnClick);
+                            chart[i].children[j + 1].addEventListener('click', functionOnClick);
                         } else {
-                            chart[i].children[j + 1].classList.add('offline');
+                            chart[i].children[j + 1].className = 'offline';
                         }
 
                         console.log(chartDate);
                         break;
                     }
                 }
-            } else {
-                chart[i].children[j + 1].classList.add('invalid');
             }
+        }
+    }
+
+    for (let i = 0; i < 12; i++) {
+
+        let dataInMonth = false;
+
+        for (let j = 0; j < monthDayCounts[i]; j++) {
+            if (chart[i].children[j + 1].className !== 'no_data') {
+                dataInMonth = true;
+            }
+        }
+
+        if (dataInMonth === false) {
+            chart[i].children[0].className = 'no_data';
         }
     }
 })();
